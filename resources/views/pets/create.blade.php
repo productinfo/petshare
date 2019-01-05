@@ -6,7 +6,7 @@
 
     <div class="card-body">
 
-        <form method="POST" action="{{ route('create') }}">
+        <form method="POST" action="{{ route('pets.store') }}">
 
             @csrf
 
@@ -25,7 +25,7 @@
             </div>
 
             <div class="form-group row">
-                <label for="breed" class="col-md-4 col-form-label text-md-right">{{ __('Breed') }} *</label>
+                <label for="breed" class="col-md-4 col-form-label text-md-right">{{ __('Breed') }} </label>
 
                 <div class="col-md-6">
                     <input id="breed" type="text" class="form-control{{ $errors->has('breed') ? ' is-invalid' : '' }}" name="breed" value="{{ old('breed') }}" required autofocus>
@@ -56,7 +56,7 @@
                 <label for="description" class="col-md-4 col-form-label text-md-right">{{ __('Description') }} *</label>
 
                 <div class="col-md-6">
-                    <input id="description" type="text" class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}" name="description" value="{{ old('description') }}" required autofocus>
+                    <textarea  id="description" type="text" class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}" name="description" value="{{ old('description') }}" required autofocus rows="5"></textarea>
 
                     @if ($errors->has('description'))
                         <span class="invalid-feedback" role="alert">
@@ -69,7 +69,7 @@
             <div class="form-group row mb-0">
                 <div class="col-md-6 offset-md-4">
                     <button type="submit" class="btn btn-primary">
-                        {{ __('Register') }}
+                        {{ __('Create') }}
                     </button>
                 </div>
             </div>
