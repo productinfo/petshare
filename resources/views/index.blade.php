@@ -4,7 +4,7 @@
 
     <div class="container">
 
-        <h1>WELCOME TO PETSHARE.COM</h1>
+        <h1 class="mt-3 d-flex justify-content-center">WELCOME TO PETSHARE.COM</h1>
 
         <div class="my-4 align-content-center">
             <img style="width:49%" src="{{ asset('images/dog.jpg') }}" class="rounded-circle img-fluid d-inline" alt="Pet" />
