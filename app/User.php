@@ -28,4 +28,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Get the user that owns the phone.
+     */
+    public function pet()
+    {
+        return $this->hasOne('App\Pet');
+    }
 }

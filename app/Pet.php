@@ -12,7 +12,7 @@ class pet extends Model
      * @var array
      */
     protected $fillable = [
-        'type', 'breed', 'name', 'description'
+        'user_id','type', 'breed', 'name', 'description'
     ];
 
     /**
@@ -21,4 +21,12 @@ class pet extends Model
      * @var array
      */
     protected $hidden = ['user_id'];
+
+    /**
+     * Get the user that owns the phone.
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }
