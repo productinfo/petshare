@@ -19,6 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('pets', 'PetController');
 Route::get('pets/search', 'PetController@search')->name('pets.search');
-// Route::resource('users', 'UserController');
+Route::post('pets/search', 'PetController@searchResults')->name('pets.searchResults');
+Route::resource('pets', 'PetController');
+Route::resource('users', 'UserController');
