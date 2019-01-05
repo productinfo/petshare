@@ -15,7 +15,9 @@ class PetController extends Controller
      */
     public function index()
     {
-        //
+        $pets = Pet::all();
+
+        return view('pets.index', compact('pets'));
     }
 
     /**
@@ -36,7 +38,26 @@ class PetController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'type'=>'required',
+            'breed'=> 'required',
+            'name' => 'required',
+            'description' => 'required',
+        ]);
+
+        $pet = new Pet([
+            // 'user_id' => Auth::user()->id,
+            // 'user_id' => auth()->user()->id
+            'user_id' => '1',
+            'type' => $request->get('type'),
+            'breed'=> $request->get('breed'),
+            'name'=> $request->get('name'),
+            'description'=> $request->get('description')
+        ]);
+
+        $pet->save();
+
+        return redirect('/home')->with('success', 'Pet has been added');
     }
 
     /**
@@ -47,7 +68,7 @@ class PetController extends Controller
      */
     public function show(pet $pet)
     {
-        //
+        return view('projects.show', compact('project'));
     }
 
     /**
@@ -58,7 +79,8 @@ class PetController extends Controller
      */
     public function edit(pet $pet)
     {
-        //
+        // $project = Project::findOrFail($id);
+        return view('projects.edit', compact('project'));
     }
 
     /**
@@ -70,7 +92,13 @@ class PetController extends Controller
      */
     public function update(Request $request, pet $pet)
     {
-        //
+        Project::update(request(['title', 'description']));
+        //dd(request()->all());
+        // $project = Project::findOrFail($id);
+        //  $project->title = request('title');
+        //  $project->description = request('description');
+        //  $project->save();
+        return redirect('/projects');
     }
 
     /**
@@ -81,7 +109,9 @@ class PetController extends Controller
      */
     public function destroy(pet $pet)
     {
-        //
+        // Project::findOrFail($id)->delete();
+        $project->delete();
+        return redirect('/projects');
     }
 
     /**
@@ -90,6 +120,15 @@ class PetController extends Controller
      */
     public function search()
     {
-        //
+        return view('pets.search');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     */
+    public function searchResults()
+    {
+        return view('pets.searchResults');
     }
 }
