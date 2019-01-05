@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\pet;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class PetController extends Controller
 {
@@ -24,7 +25,7 @@ class PetController extends Controller
      */
     public function create()
     {
-        //
+        return view('pets.create');
     }
 
     /**
@@ -79,6 +80,15 @@ class PetController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(pet $pet)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     */
+    public function search()
     {
         //
     }

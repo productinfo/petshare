@@ -38,6 +38,15 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('pets.search') }}">{{ __('Search Pets') }}</a>
+                        </li>
+
+                        {{--<li class="nav-item">--}}
+                            {{--<a class="nav-link" href="{{ route('pets.create') }}">{{ __('Create Pet Profile') }}</a>--}}
+                        {{--</li>--}}
+
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
