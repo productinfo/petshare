@@ -29,6 +29,11 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function getName()
+    {
+        return $this->first_name. " ".$this->last_name;
+    }
+
     /**
      * Get the user that owns the phone.
      */
