@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\pet;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class PetController extends Controller
 {
@@ -94,10 +93,10 @@ class PetController extends Controller
     public function update(Request $request, pet $pet)
     {
         $request->validate([
-            'type'=>'required',
-            'breed'=> '',
-            'name' => 'required',
-            'description' => 'required',
+            'type'=>'required|max:12',
+            'breed'=> 'max:30',
+            'name' => 'required|max:100',
+            'description' => 'required|max:3000',
         ]);
 
         // Pet::update(request(['type', 'breed','name', 'description']));

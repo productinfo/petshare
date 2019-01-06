@@ -43,45 +43,75 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\user $user
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(user $user)
     {
-        //
+        return view('users.show', compact('user'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\user $user
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(user $user)
     {
-        //
+        return view('users.edit', compact('user'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\user $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, user $user)
     {
-        //
+
+        $request->validate([
+            'first_name'=>'required|max:100',
+            'last_name'=> 'required|max:100',
+            'screen_name' => 'required|max:100',
+            'role' => 'in:owner,non-owner',
+            'gender'=> 'in:male,female',
+            'age'=> 'required|integer|max:100',
+            'street' => 'required|max:255',
+            'city' => 'required|max:100',
+            'state'=> 'required|max:15',
+            'zip_code' => 'required|max:15',
+            'email' => 'required|max:100'
+        ]);
+
+        $user = User::findOrFail($user->id);
+        $user->first_name = request('first_name');
+        $user->last_name = request('last_name');
+        $user->screen_name = request('screen_name');
+        $user->role = request('role');
+        $user->gender = request('gender');
+        $user->age = request('age');
+        $user->street = request('street');
+        $user->city = request('city');
+        $user->state = request('state');
+        $user->zip_code = request('zip_code');
+        $user->email = request('email');
+        $user->update();
+
+        return redirect('/users/' . $user->id);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\user $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(user $user)
     {
-        //
+        $user->delete();
+        return redirect('/users');
     }
 }
