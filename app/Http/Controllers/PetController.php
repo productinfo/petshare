@@ -40,16 +40,16 @@ class PetController extends Controller
     {
         $request->validate([
             'type'=>'required',
-            'breed'=> 'required',
+            'breed'=> '',
             'name' => 'required',
             'description' => 'required',
         ]);
 
         $pet = new Pet([
-            // 'user_id' => Auth::user()->id,
             // 'user_id' => auth()->user()->id
-            'user_id' => '1',
-            'type' => $request->get('type'),
+            // 'user_id' => '1',
+            'user_id' => (auth()->user()->id ?: 1),
+            'type'=> $request->get('type'),
             'breed'=> $request->get('breed'),
             'name'=> $request->get('name'),
             'description'=> $request->get('description')
@@ -57,7 +57,7 @@ class PetController extends Controller
 
         $pet->save();
 
-        return redirect('/home')->with('success', 'Pet has been added');
+        return redirect('/pets')->with('success', 'Pet has been added');
     }
 
     /**
@@ -68,7 +68,8 @@ class PetController extends Controller
      */
     public function show(pet $pet)
     {
-        return view('projects.show', compact('project'));
+        // dd($pet);
+        return view('pets.show', compact('pet'));
     }
 
     /**
@@ -80,7 +81,7 @@ class PetController extends Controller
     public function edit(pet $pet)
     {
         // $project = Project::findOrFail($id);
-        return view('projects.edit', compact('project'));
+        return view('pets.edit', compact('pet'));
     }
 
     /**
@@ -92,13 +93,22 @@ class PetController extends Controller
      */
     public function update(Request $request, pet $pet)
     {
-        Project::update(request(['title', 'description']));
-        //dd(request()->all());
-        // $project = Project::findOrFail($id);
-        //  $project->title = request('title');
-        //  $project->description = request('description');
-        //  $project->save();
-        return redirect('/projects');
+        $request->validate([
+            'type'=>'required',
+            'breed'=> '',
+            'name' => 'required',
+            'description' => 'required',
+        ]);
+
+        // Pet::update(request(['type', 'breed','name', 'description']));
+        $pet = Pet::findOrFail($pet->id);
+        $pet->type = request('type');
+        $pet->breed = request('breed');
+        $pet->name = request('name');
+        $pet->description = request('description');
+        $pet->update();
+
+        return redirect('/pets/' . $pet->id);
     }
 
     /**
@@ -110,8 +120,8 @@ class PetController extends Controller
     public function destroy(pet $pet)
     {
         // Project::findOrFail($id)->delete();
-        $project->delete();
-        return redirect('/projects');
+        $pet->delete();
+        return redirect('/pets');
     }
 
     /**
