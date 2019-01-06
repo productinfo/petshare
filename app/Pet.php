@@ -2,6 +2,8 @@
 
 namespace App;
 
+use \App\User;
+
 use Illuminate\Database\Eloquent\Model;
 
 class pet extends Model
@@ -28,5 +30,13 @@ class pet extends Model
     public function user()
     {
         return $this->belongsTo('App\User');
+    }
+
+    /**
+     * duplicate of user() method but 'owner' is the semantic relationship
+     */
+    public function owner()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }
