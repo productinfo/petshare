@@ -21,6 +21,7 @@
 </head>
 <body>
     <div id="app">
+
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -39,13 +40,46 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('pets.search') }}">{{ __('Search Pets') }}</a>
-                        </li>
+                        {{--<li class="nav-item">--}}
+                            {{--<a class="nav-link" href="{{ route('users.index') }}">{{ __('Index Users') }}</a>--}}
+                        {{--</li>--}}
+
+                        {{--<li class="nav-item">--}}
+                            {{--<a class="nav-link" href="/users/show/{{ auth()->user()->id }}">{{ __('Show User') }}</a>--}}
+                            {{--<a class="nav-link" href="{{ route('users.show') }}">{{ __('Show User') }}</a>--}}
+                        {{--</li>--}}
+
+                        {{--<li class="nav-item">--}}
+                            {{--<a class="nav-link" href="{{ route('users.edit') }}">{{ __('Edit User') }}</a>--}}
+                        {{--</li>--}}
+
+                        {{--<li class="nav-item">--}}
+                            {{--<a class="nav-link" href="{{ route('users.destroy') }}">{{ __('Delete/destroy User') }}</a>--}}
+                        {{--</li>--}}
+
+                        {{--<li class="nav-item">--}}
+                            {{--<a class="nav-link" href="{{ route('pets.index') }}">{{ __('Index Pets') }}</a>--}}
+                        {{--</li>--}}
 
                         {{--<li class="nav-item">--}}
                             {{--<a class="nav-link" href="{{ route('pets.create') }}">{{ __('Create Pet Profile') }}</a>--}}
                         {{--</li>--}}
+
+                        {{--<li class="nav-item">--}}
+                            {{--<a class="nav-link" href="{{ route('pets.show') }}">{{ __('Show Pets') }}</a>--}}
+                        {{--</li>--}}
+
+                        {{--<li class="nav-item">--}}
+                            {{--<a class="nav-link" href="{{ route('pets.edit') }}">{{ __('Edit Pet') }}</a>--}}
+                        {{--</li>--}}
+
+                        {{--<li class="nav-item">--}}
+                            {{--<a class="nav-link" href="{{ route('pets.destroy') }}">{{ __('Delete/destroy Pet') }}</a>--}}
+                        {{--</li>--}}
+
+                        <li class="nav-item mr-4">
+                            <a class="nav-link" href="{{ route('pets.search') }}">{{ __('SEARCH PETS') }}</a>
+                        </li>
 
                         <!-- Authentication Links -->
                         @guest
@@ -60,7 +94,7 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                    Welcome, {{ Auth::user()->screen_name }} <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">

@@ -20,6 +20,7 @@
                 <th scope="col">St</th>
                 <th scope="col">Zip</th>
                 <th scope="col">Email</th>
+                <th scope="col">Actions</th>
             </tr>
             </thead>
             <tbody>
@@ -27,7 +28,7 @@
                 <tr>
                     <td>{{ $user->first_name }}</td>
                     <td>{{ $user->last_name }}</td>
-                    <td>{{ $user->screen_name }}</td>
+                    <td><a href="/users/{{ $user->id }}">{{ $user->screen_name }}</a></td>
                     <td>{{ $user->role }}</td>
                     <td>{{ $user->gender }}</td>
                     <td>{{ $user->age }}</td>
@@ -36,6 +37,17 @@
                     <td>{{ $user->state }}</td>
                     <td>{{ $user->zip_code }}</td>
                     <td>{{ $user->email }}</td>
+                    <td>
+                        <div style="width: 7rem">
+                            <a href="/users/{{ $user->id }}/edit" class="btn btn-outline-primary btn-sm mr-2 d-inline">Edit</a>
+                            {{--<a href="/users/{{ $user->id }}" class="btn btn-outline-primary btn-sm">Delete</a>--}}
+                            <form method="POST" action="users/{{ $user->id }}" class="d-inline">
+                                {{ method_field('DELETE') }}
+                                {{ csrf_field() }}
+                                <button class="btn btn-outline-primary btn-sm">Delete</button>
+                            </form>
+                        </div>
+                    </td>
                 </tr>
             @endforeach
             </tbody>
