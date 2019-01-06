@@ -14,6 +14,7 @@
                 <th scope="col">Breed</th>
                 <th scope="col">Name</th>
                 <th scope="col">Description</th>
+                <th scope="col">Actions</th>
             </tr>
             </thead>
             <tbody>
@@ -22,8 +23,19 @@
                     <td>{{ $pet->user_id}}</td>
                     <td>{{ $pet->type }}</td>
                     <td>{{ $pet->breed }}</td>
-                    <td>{{ $pet->name }}</td>
+                    <th><a href="/pets/{{ $pet->id }}">{{ $pet->name  }}</a></th>
                     <td>{{ $pet->description }}</td>
+                    <td>
+                        <div style="width: 7rem">
+                            <a href="/pets/{{ $pet->id }}/edit" class="btn btn-outline-primary btn-sm mr-2 d-inline">Edit</a>
+                            {{--<a href="/pets/{{ $pet->id }}" class="btn btn-outline-primary btn-sm">Delete</a>--}}
+                            <form method="POST" action="pets/{{ $pet->id }}" class="d-inline">
+                                {{ method_field('DELETE') }}
+                                {{ csrf_field() }}
+                                <button class="btn btn-outline-primary btn-sm">Delete</button>
+                            </form>
+                        </div>
+                    </td>
                 </tr>
             @endforeach
             </tbody>
