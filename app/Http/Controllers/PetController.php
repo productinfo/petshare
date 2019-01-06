@@ -8,15 +8,15 @@ use Illuminate\Http\Request;
 class PetController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the resource
      *
+     * @param  \App\pet  $pet
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $pets = Pet::all();
 
-        return view('pets.index', compact('pets'));
     }
 
     /**
@@ -45,8 +45,6 @@ class PetController extends Controller
         ]);
 
         $pet = new Pet([
-            // 'user_id' => auth()->user()->id
-            // 'user_id' => '1',
             'user_id' => (auth()->user()->id ?: 1),
             'type'=> $request->get('type'),
             'breed'=> $request->get('breed'),
@@ -67,7 +65,6 @@ class PetController extends Controller
      */
     public function show(pet $pet)
     {
-        // dd($pet);
         return view('pets.show', compact('pet'));
     }
 
@@ -79,7 +76,6 @@ class PetController extends Controller
      */
     public function edit(pet $pet)
     {
-        // $project = Project::findOrFail($id);
         return view('pets.edit', compact('pet'));
     }
 
@@ -124,7 +120,7 @@ class PetController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Display search screen
      *
      */
     public function search()
@@ -133,11 +129,20 @@ class PetController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Display search results 
      *
+     * @param  \Illuminate\Http\Request  $request
      */
-    public function searchResults()
+    public function searchResults(Request $request)
     {
-        return view('pets.searchResults');
+        $request->validate([
+            'type'=>'in:dog,cat,horse,bird,rabbit,fish,other',
+        ]);
+
+        $type = $request->input('type');
+
+        $pets = Pet::where('type', $type)->get();
+
+        return view('pets.index', compact('pets'));
     }
 }

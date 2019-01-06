@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="card-header">{{ __('Pets') }}</div>
+    <div class="card-header">{{ __('Pets Search Results') }}</div>
 
     <div class="card-body">
 
