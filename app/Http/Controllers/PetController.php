@@ -116,7 +116,7 @@ class PetController extends Controller
     {
         // Project::findOrFail($id)->delete();
         $pet->delete();
-        return redirect('/pets');
+        return redirect('/users/' . auth()->user()->id);
     }
 
     /**
