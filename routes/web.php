@@ -12,7 +12,11 @@
 */
 
 Route::get('/', function () {
-    return view('index');
+    if (Auth::check()) {
+        return redirect('/users/' . auth()->user()->id);
+    } else {
+        return view('index');
+    }
 });
 
 Auth::routes();
