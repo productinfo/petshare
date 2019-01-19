@@ -7,29 +7,29 @@
     <div class="card-body">
 
         <div class="row my-2">
-            <div class="col-md-4 text-md-right">Name:</div>
-            <div class="col-md-6">{{ $pet->name  }}</div>
+            <div class="col-4 text-md-right">Name:</div>
+            <div class="col-6">{{ $pet->name  }}</div>
         </div>
         <div class="row my-2">
-            <div class="col-md-4 text-md-right">Type:</div>
-            <div class="col-md-6">{{ $pet->type }}</div>
+            <div class="col-4 text-md-right">Type:</div>
+            <div class="col-6">{{ $pet->type }}</div>
         </div>
         <div class="row my-2">
-            <div class="col-md-4 text-md-right">Breed:</div>
-            <div class="col-md-6">{{ $pet->breed }}</div>
+            <div class="col-4 text-md-right">Breed:</div>
+            <div class="col-6">{{ $pet->breed }}</div>
         </div>
         <div class="row my-2">
-            <div class="col-md-4 text-md-right">Description:</div>
-            <div class="col-md-6">{{ $pet->description }}</div>
+            <div class="col-4 text-md-right">Description:</div>
+            <div class="col-6">{{ $pet->description }}</div>
         </div>
 
         <div class="row mt-5 mb-2">
-            <div class="col-md-4 text-md-right">Owner screen name:</div>
-            <div class="col-md-6"><a href="/users/{{ $pet->owner->id }}">{{ $pet->owner->screen_name }}</a></div>
+            <div class="col-4 text-md-right">Owner screen name:</div>
+            <div class="col-6"><a href="/users/{{ $pet->owner->id }}">{{ $pet->owner->screen_name }}</a></div>
         </div>
         <div class="row my-2">
-            <div class="col-md-4 text-md-right">Owner's/pet's address:</div>
-            <div class="col-md-6">{{ $pet->owner->street }} {{ $pet->owner->city }}, {{ $pet->owner->state }} {{ $pet->owner->zip_code }}</div>
+            <div class="col-4 text-md-right">Owner's/pet's address:</div>
+            <div class="col-6">{{ $pet->owner->street }} {{ $pet->owner->city }}, {{ $pet->owner->state }} {{ $pet->owner->zip_code }}</div>
         </div>
 
         <div class="row mt-5 mb-4">
