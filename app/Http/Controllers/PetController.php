@@ -39,13 +39,13 @@ class PetController extends Controller
     {
         $request->validate([
             'type'=>'required',
-            'breed'=> '',
-            'name' => 'required',
-            'description' => 'required',
+            'breed'=> 'max:30',
+            'name' => 'required|max:100',
+            'description' => 'required|max:3000',
         ]);
 
         $pet = new Pet([
-            'user_id' => (auth()->user()->id ?: 1),
+            'user_id' => auth()->user()->id,
             'type'=> $request->get('type'),
             'breed'=> $request->get('breed'),
             'name'=> $request->get('name'),

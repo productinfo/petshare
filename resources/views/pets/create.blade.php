@@ -39,7 +39,7 @@
                 <label for="breed" class="col-md-4 col-form-label text-md-right">{{ __('Breed') }} </label>
 
                 <div class="col-md-6">
-                    <input id="breed" type="text" class="form-control{{ $errors->has('breed') ? ' is-invalid' : '' }}" name="breed" value="{{ old('breed') }}" required autofocus>
+                    <input id="breed" type="text" class="form-control{{ $errors->has('breed') ? ' is-invalid' : '' }}" name="breed" value="{{ old('breed') }}" autofocus>
 
                     @if ($errors->has('breed'))
                         <span class="invalid-feedback" role="alert">
