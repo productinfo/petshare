@@ -50,13 +50,13 @@
             </div>
 
             <div class="form-group row">
-                <label for="distance" class="col-md-4 col-form-label text-md-right">{{ __('Within') }}</label>
+                <label for="distance" class="col-md-4 col-form-label text-md-right">{{ __('Within miles') }}</label>
 
                 <div class="col-md-6">
                     <select class="form-control" id="distance">
-                        <option>1 mile</option>
-                        <option>5 miles</option>
-                        <option>25 miles</option>
+                        <option>1</option>
+                        <option>5</option>
+                        <option>25</option>
                     </select>
                 </div>
             </div>
