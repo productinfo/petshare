@@ -8,12 +8,12 @@
 
         @if ($user->role === 'owner')
             <div class="row mt-2 mb-4">
-                <div class="col-md-5 offset-md-3">As a pet owner: <a href="{{ route('pets.create') }}" class="btn btn-primary btn-lg">CREATE PET PROFILE</a>
+                <div class="col-md-5 offset-md-3">As a pet owner:  <a href="{{ route('pets.create') }}" class="btn btn-primary btn-lg ml-2">CREATE PET PROFILE</a>
                 </div>
             </div>
         @else
             <div class="row mt-2 mb-4">
-                <div class="col-md-5 offset-md-3">As a non-pet owner: <a href="{{ route('pets.search') }}" class="btn btn-primary btn-lg">SEARCH FOR PETS</a>
+                <div class="col-md-5 offset-md-3">As a non-pet owner: <a href="{{ route('pets.search') }}" class="btn btn-primary btn-lg ml-2">SEARCH FOR PETS</a>
                 </div>
             </div>
         @endif
