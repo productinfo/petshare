@@ -18,7 +18,7 @@ $factory->define(App\User::class, function (Faker $faker) {
         'first_name' => $faker->firstName,
         'last_name' => $faker->lastName,
         'screen_name' => $faker->word,
-        'role' => $faker->randomElement(['owner', 'nonowner']),
+        'role' => $faker->randomElement(['owner', 'non-owner']),
         'gender' => $faker->randomElement(['male', 'female']),
         'age' => $faker->numberBetween($min = 15, $max = 70),
         'street' => $faker->streetAddress,
