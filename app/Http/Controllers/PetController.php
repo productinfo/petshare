@@ -54,7 +54,7 @@ class PetController extends Controller
 
         $pet->save();
 
-        return redirect('/pets')->with('success', 'Pet has been added');
+        return redirect('/pets/' . $pet->id)->with('success', 'Pet has been added');
     }
 
     /**
@@ -136,7 +136,7 @@ class PetController extends Controller
     public function searchResults(Request $request)
     {
         $request->validate([
-            'type'=>'in:dog,cat,horse,bird,rabbit,fish,other',
+            'type'=>'in:dog,cat,horse,bird,rabbit,fish,reptile,other',
         ]);
 
         $type = $request->input('type');

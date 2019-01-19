@@ -16,7 +16,18 @@
                 <label for="type" class="col-md-4 col-form-label text-md-right">{{ __('Type') }} *</label>
 
                 <div class="col-md-6">
-                    <input id="type" type="text" class="form-control{{ $errors->has('type') ? ' is-invalid' : '' }}" name="type" value="{{ $pet->type }}" required autofocus>
+                    {{--<input id="type" type="text" class="form-control{{ $errors->has('type') ? ' is-invalid' : '' }}" name="type" value="{{ $pet->type }}" required autofocus>--}}
+
+                    <select class="form-control" id="type" name="type">
+                        <option>dog</option>
+                        <option>cat</option>
+                        <option>horse</option>
+                        <option>bird</option>
+                        <option>rabbit</option>
+                        <option>fish</option>
+                        <option>reptile</option>
+                        <option>other</option>
+                    </select>
 
                     @if ($errors->has('type'))
                         <span class="invalid-feedback" role="alert">
