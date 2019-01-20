@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class PetController extends Controller
 {
     /**
-     * Display a listing of the resource
+     * Display a listing of the SEARCH RESULT pets/resource
      *
      * @param  \App\pet  $pet
      * @param  \Illuminate\Http\Request  $request
@@ -38,7 +38,7 @@ class PetController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'type'=>'required',
+            'type'=>'in:dog,cat,horse,bird,rabbit,fish,reptile,other',
             'breed'=> 'max:30',
             'name' => 'required|max:100',
             'description' => 'required|max:3000',
@@ -89,7 +89,7 @@ class PetController extends Controller
     public function update(Request $request, pet $pet)
     {
         $request->validate([
-            'type'=>'required|max:12',
+            'type'=>'in:dog,cat,horse,bird,rabbit,fish,reptile,other',
             'breed'=> 'max:30',
             'name' => 'required|max:100',
             'description' => 'required|max:3000',
@@ -129,20 +129,31 @@ class PetController extends Controller
     }
 
     /**
-     * Display search results 
+     * Display a listing of the SEARCH RESULT pets/resource
      *
+     * @param  \App\pet  $pet
      * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
      */
     public function searchResults(Request $request)
     {
         $request->validate([
             'type'=>'in:dog,cat,horse,bird,rabbit,fish,reptile,other',
+            'distance'=>'in:1,5,25',
+            'street'=> 'required|max:100',
+            'city' => 'required|max:100',
+            'state' => 'required|max:100',
         ]);
 
         $type = $request->input('type');
+        $distance = $request->input('distance');
+        $street = $request->input('street');
+        $city = $request->input('city');
+        $state = $request->input('state');
 
         $pets = Pet::where('type', $type)->get();
 
         return view('pets.index', compact('pets'));
     }
+
 }

@@ -6,7 +6,7 @@
 
     <div class="card-body">
 
-        <form method="POST" action="{{ route('pets.search') }}">
+        <form method="POST" action="{{ route('pets.searchResults') }}">
 
             @csrf
 
