@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use GuzzleHttp\Client;
 
 class RegisterController extends Controller
 {
@@ -74,6 +75,19 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        // get latitude and longitude of address with Guzzle http package and Google Maps geocode API
+        $client = new Client(); // GuzzleHttp\Client
+        $baseURL = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
+        $addressURL = urlencode(request('street')) . ',' . urlencode(request('city')) . ',' . urlencode(request('state')) . '&key=' . env('GOOGLE_MAPS_API_KEY');
+        $url = $baseURL . $addressURL;
+        $request = $client->request('GET', $url);
+        // echo $response->getStatusCode(); // 200
+        $response = $request->getBody()->getContents();
+        $response = json_decode($response);
+        $latitude = $response->results[0]->geometry->location->lat;
+        $longitude = $response->results[0]->geometry->location->lng;
+        $data["latitude"] = $latitude;
+        $data["longitude"] = $longitude;
 
         return User::create([
             'first_name' => $data['first_name'],
@@ -86,6 +100,8 @@ class RegisterController extends Controller
             'city' => $data['city'],
             'state' => $data['state'],
             'zip_code' => $data['zip_code'],
+            'latitude' => $data['latitude'],
+            'longitude' => $data['longitude'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);

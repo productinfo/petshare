@@ -25,6 +25,8 @@ class CreateUsersTable extends Migration
             $table->string('city');
             $table->string('state');
             $table->unsignedInteger('zip_code');
+            $table->decimal('latitude', 20,15);
+            $table->decimal('longitude', 20, 15);
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
