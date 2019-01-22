@@ -58,7 +58,6 @@
                 <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Role') }} *</label>
 
                 <div class="col-md-6">
-                    {{--<input id="role" type="text" class="form-control{{ $errors->has('role') ? ' is-invalid' : '' }}" name="role" value="{{ $user->role }}" required autofocus>--}}
 
                     <select class="form-control" id="role" name="role">
                         <option>owner</option>
@@ -77,7 +76,11 @@
                 <label for="gender" class="col-md-4 col-form-label text-md-right">{{ __('Gender') }} *</label>
 
                 <div class="col-md-6">
-                    <input id="gender" type="text" class="form-control{{ $errors->has('gender') ? ' is-invalid' : '' }}" name="gender" value="{{ $user->gender }}" required autofocus>
+
+                    <select class="form-control" id="gender" name="gender">
+                        <option>male</option>
+                        <option>female</option>
+                    </select>
 
                     @if ($errors->has('gender'))
                         <span class="invalid-feedback" role="alert">
