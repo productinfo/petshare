@@ -6,7 +6,7 @@
 
     <div class="card-body">
 
-        <form method="POST" action="/pets/{{ $pet->id }}">
+        <form method="POST" action="/pets/{{ $pet->id }}" enctype="multipart/form-data">
 
             {{ method_field('PATCH') }}
 
@@ -74,6 +74,19 @@
                     @if ($errors->has('description'))
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $errors->first('description') }}</strong>
+                        </span>
+                    @endif
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="photo"  class="col-md-4 col-form-label text-md-right">{{ __('Upload photo of pet') }}</label>
+                <div class="col-md-6">
+                    <input id="photo" type="file" class="form-control-file {{ $errors->has('name') ? ' is-invalid' : '' }}" name="photo" value="{{ old('photo') }}">
+
+                    @if ($errors->has('photo'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $errors->first('photo') }}</strong>
                         </span>
                     @endif
                 </div>

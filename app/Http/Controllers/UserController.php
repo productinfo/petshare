@@ -124,6 +124,7 @@ class UserController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\user $user
+     * @throws - unhandled currently
      * @return \Illuminate\Http\Response
      */
     public function destroy(user $user)

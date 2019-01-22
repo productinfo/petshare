@@ -6,6 +6,8 @@
 
     <div class="card-body">
 
+        <img class="rounded mx-auto d-block img-fluid" src="{{url('uploads/'.$pet->photo)}}" alt="{{$pet->name}}" style="height:20em;">
+
         <div class="row my-2">
             <div class="col-4 text-md-right">Name:</div>
             <div class="col-6">{{ $pet->name  }}</div>

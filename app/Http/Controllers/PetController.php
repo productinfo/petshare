@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\pet;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class PetController extends Controller
 {
@@ -37,12 +40,21 @@ class PetController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
+
         $request->validate([
             'type'=>'in:dog,cat,horse,bird,rabbit,fish,reptile,other',
             'breed'=> 'max:30',
             'name' => 'required|max:100',
             'description' => 'required|max:3000',
+            'photo' => 'image'
         ]);
+
+        $photo_uuid = Str::uuid()->toString();
+
+        $photo = $request->file('photo');
+        $extension = $photo->getClientOriginalExtension();
+        Storage::disk('public')->put($photo_uuid.'.'.$extension,  File::get($photo));
 
         $pet = new Pet([
             'user_id' => auth()->user()->id,
@@ -52,6 +64,7 @@ class PetController extends Controller
             'description'=> $request->get('description'),
             'latitude' => auth()->user()->latitude,
             'longitude' => auth()->user()->longitude,
+            'photo' => $photo_uuid.'.'.$extension,
         ]);
 
         $pet->save();
@@ -95,14 +108,24 @@ class PetController extends Controller
             'breed'=> 'max:30',
             'name' => 'required|max:100',
             'description' => 'required|max:3000',
+            'photo' => 'image'
         ]);
 
-        // Pet::update(request(['type', 'breed','name', 'description']));
         $pet = Pet::findOrFail($pet->id);
         $pet->type = request('type');
         $pet->breed = request('breed');
         $pet->name = request('name');
         $pet->description = request('description');
+
+        // file upload code throws fatal error if no file is uploaded.  Check if exists
+        if ($request->hasFile('photo')) {
+            $photo_uuid = Str::uuid()->toString();
+            $photo = $request->file('photo');
+            $extension = $photo->getClientOriginalExtension();
+            $pet->photo = $photo_uuid . '.' . $extension;
+            Storage::disk('public')->put($pet->photo,  File::get($photo));
+        }
+
         $pet->update();
 
         return redirect('/pets/' . $pet->id);
@@ -112,12 +135,14 @@ class PetController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\pet  $pet
+     * @throws - not handled currently
      * @return \Illuminate\Http\Response
      */
     public function destroy(pet $pet)
     {
-        // Project::findOrFail($id)->delete();
+        Storage::disk('public')->delete($pet->photo);
         $pet->delete();
+
         return redirect('/users/' . auth()->user()->id);
     }
 

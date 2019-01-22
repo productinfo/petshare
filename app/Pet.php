@@ -14,7 +14,8 @@ class pet extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'type', 'breed', 'name', 'description', 'latitude', 'longitude'
+        'user_id', 'type', 'breed', 'name', 'description', 'latitude', 'longitude',
+        'photo'
     ];
 
     /**

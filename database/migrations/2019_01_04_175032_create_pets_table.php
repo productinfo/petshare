@@ -22,6 +22,7 @@ class CreatePetsTable extends Migration
             $table->mediumText('description');
             $table->decimal('latitude', 20,15)->nullable();
             $table->decimal('longitude', 20, 15)->nullable();
+            $table->string('photo')->nullable();
             $table->timestamps();
         });
     }
