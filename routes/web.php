@@ -22,7 +22,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/thanks', 'HomeController@thanks')->name('thanks');
+Route::get('/thanks', function() {
+    return view('thanks');
+});
 Route::get('pets/search', 'PetController@search')->name('pets.search');
 Route::post('pets/searchResults', 'PetController@searchResults')->name('pets.searchResults');
 Route::resource('pets', 'PetController');
