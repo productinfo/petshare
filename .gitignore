@@ -9,4 +9,8 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+.idea\
+.idea\dataSources\d0032ab5-a1ca-4866-91e3-a8036ec639c5.xml
+.idea
 .idea/
+.idea\dataSources
