@@ -20,6 +20,8 @@ class CreatePetsTable extends Migration
             $table->string('breed');
             $table->string('name');
             $table->mediumText('description');
+            $table->decimal('latitude', 20,15)->nullable();
+            $table->decimal('longitude', 20, 15)->nullable();
             $table->timestamps();
         });
     }

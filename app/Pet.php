@@ -14,7 +14,7 @@ class pet extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id','type', 'breed', 'name', 'description'
+        'user_id', 'type', 'breed', 'name', 'description', 'latitude', 'longitude'
     ];
 
     /**
@@ -39,4 +39,31 @@ class pet extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    /**
+     * search for matches using Haverline Forumula with lat and long to determine closest
+     * @param $latitude
+     * @param $longitude
+     * @param $distance,
+     * @param $type
+     * @return Pet $pets
+     */
+    public static function searchWithDistance($latitude, $longitude, $distance, $type){
+
+        $pets = Pet::select('*')
+            ->selectRaw('( 3959 * acos( cos( radians(?) ) *
+                           cos( radians( latitude ) )
+                           * cos( radians( longitude ) - radians(?)
+                           ) + sin( radians(?) ) *
+                           sin( radians( latitude ) ) )
+                         ) AS distance', [$latitude, $longitude, $latitude])
+            ->havingRaw("distance < ?", [$distance])
+            ->where('type', $type)
+            ->orderBy('distance','asc')
+            ->take(20)
+            ->get();
+
+        return $pets;
+    }
+
 }

@@ -11,9 +11,10 @@
             <tr>
                 <th scope="col">Type</th>
                 <th scope="col">Breed</th>
+                <th scope="col">Distance in miles</th>
                 <th scope="col">Name</th>
                 <th scope="col">Description</th>
-                <th scope="col">Actions</th>
+                <th scope="col">Action</th>
             </tr>
             </thead>
             <tbody>
@@ -21,6 +22,7 @@
                 <tr>
                     <td>{{ $pet->type }}</td>
                     <td>{{ $pet->breed }}</td>
+                    <td>{{ number_format($pet->distance,1)  }}</td>
                     <td>{{ $pet->name  }}</td>
                     <td>{{ $pet->description }}</td>
                     <td>

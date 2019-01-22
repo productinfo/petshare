@@ -25,8 +25,8 @@ $factory->define(App\User::class, function (Faker $faker) {
         'city' => $faker->randomElement(['Berkeley', 'Royal Oak','Clawson','Beverly Hills','Lathrup Village']),
         'state' => 'MI',
         'zip_code' => $faker->randomElement(['48072', '48067','48067','48068','48025']),
-        'latitude' => $faker->latitude(),
-        'longitude' => $faker->longitude(),
+        'latitude' => $faker->latitude(-90, 90),
+        'longitude' => $faker->longitude(-180, 180),
         'email' => $faker->unique()->safeEmail,
         'email_verified_at' => now(),
         'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', // secret

@@ -49,7 +49,9 @@ class PetController extends Controller
             'type'=> $request->get('type'),
             'breed'=> $request->get('breed'),
             'name'=> $request->get('name'),
-            'description'=> $request->get('description')
+            'description'=> $request->get('description'),
+            'latitude' => auth()->user()->latitude,
+            'longitude' => auth()->user()->longitude,
         ]);
 
         $pet->save();
@@ -140,18 +142,21 @@ class PetController extends Controller
         $request->validate([
             'type'=>'in:dog,cat,horse,bird,rabbit,fish,reptile,other',
             'distance'=>'in:1,5,25',
-            'street'=> 'required|max:100',
-            'city' => 'required|max:100',
-            'state' => 'required|max:100',
+            // 'street'=> 'required|max:100',
+            // 'city' => 'required|max:100',
+            // 'state' => 'required|max:100',
         ]);
 
-        $type = $request->input('type');
-        $distance = $request->input('distance');
-        $street = $request->input('street');
-        $city = $request->input('city');
-        $state = $request->input('state');
+        // won't use address in search form for starters - use lat and lng of logged-in user
+        $latitude = auth()->user()->latitude;
+        $longitude = auth()->user()->longitude;
 
-        $pets = Pet::where('type', $type)->get();
+        $type = $request->input('type');
+        // $distance = $request->input('distance');
+        $distance = 100000;  // fake lats and longs are all over the place - need a big number
+
+        // search
+        $pets = Pet::searchWithDistance($latitude, $longitude, $distance, $type);
 
         return view('pets.index', compact('pets'));
     }
