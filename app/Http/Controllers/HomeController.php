@@ -27,12 +27,4 @@ class HomeController extends Controller
         // return redirect('/users');
     }
 
-    /**
-     * User has deleted their account.  Show "thank you" screen.
-     *
-     */
-    public function thanks()
-    {
-        return view('thanks');
-    }
 }
