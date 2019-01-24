@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="card-header">{{ __('User') }}: {{ $user->screen_name }}</div>
+    <div class="card-header">{{ __('User') }}: {{ $user->getName()}}</div>
 
     <div class="card-body">
 

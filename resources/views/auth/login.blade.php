@@ -61,7 +61,20 @@
                     @endif
                 </div>
             </div>
+
         </form>
+
+        <form>
+            <div class="form-group row mt-5">
+                <label for="login_social" class="col-md-4 col-form-label text-md-right">{{ __('Or Login with Social') }} </label>
+                <div class="col-md-6">
+                    <a href="{{ url('/login/facebook') }}" class="btn btn-facebook px-4 mr-4"><i class="fa fa-facebook"></i> Facebook</a>
+                    {{--<a href="{{ url('/login/twitter') }}" class="btn btn-twitter px-4 mr-4"><i class="fa fa-twitter"></i> Twitter</a>--}}
+                    {{--<a href="{{ url('/login/google') }}" class="btn btn-google px-4"><i class="fa fa-facebook"></i> Google</a>--}}
+                </div>
+            </div>
+        </form>
+
     </div>
 
 @endsection

@@ -12,6 +12,11 @@
         @endif
 
         This is a vestigial screen with no meaning.  If you are seeing it, something is probably wrong.
+
+        <p>My name: {{Auth::user()->name}}</p>
+        <p>My Email: {{Auth::user()->email}}</p>
+        <img alt="{{Auth::user()->name}}" src="{{Auth::user()->image}}"/>
+
     </div>
 
 @endsection

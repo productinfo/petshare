@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -23,8 +24,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return redirect('/users/' . auth()->user()->id);
+        $user = Auth::user();
+        return view('home', compact('user'));
+        // return view('users.show', compact('user'));
+
+        // return redirect('/users/' . auth()->user()->id);
         // return redirect('/users');
+
     }
 
 }

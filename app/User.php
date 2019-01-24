@@ -17,7 +17,8 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'first_name', 'last_name', 'screen_name', 'role', 'gender',
-        'age', 'street', 'city', 'state', 'zip_code', 'email', 'password','latitude','longitude'
+        'age', 'street', 'city', 'state', 'zip_code', 'email', 'password','latitude','longitude',
+        'image', 'provider', 'provider_id'
     ];
 
     /**
@@ -35,10 +36,11 @@ class User extends Authenticatable
     }
 
     /**
-     * Get the user that owns the phone.
+     * Get the user that owns the pet.
      */
     public function pet()
     {
         return $this->hasOne('App\Pet');
     }
+
 }

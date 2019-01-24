@@ -18,12 +18,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
 
-    <style>
-        option {
-            font-size: 1.2rem;
-        }
-    </style>
 </head>
 <body>
     <div id="app">
@@ -100,7 +96,7 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    Welcome, {{ Auth::user()->screen_name }} <span class="caret"></span>
+                                    Welcome, {{ Auth::user()->getName() }} <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
