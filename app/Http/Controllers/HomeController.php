@@ -25,12 +25,8 @@ class HomeController extends Controller
     public function index()
     {
         $user = Auth::user();
-        return view('home', compact('user'));
-        // return view('users.show', compact('user'));
 
-        // return redirect('/users/' . auth()->user()->id);
-        // return redirect('/users');
-
+        return view('users.show', compact('user'));
     }
 
 }

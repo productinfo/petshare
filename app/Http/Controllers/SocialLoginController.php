@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\user;
 use Auth;
-// use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 
 class SocialLoginController extends Controller
@@ -22,7 +21,7 @@ class SocialLoginController extends Controller
 
         if ($users) {
             Auth::login($users);
-            return redirect('/users/' . auth()->user()->id);
+            return redirect()->route('home');
         } else {
 
             $full_name = $userSocial->getName();
@@ -37,8 +36,9 @@ class SocialLoginController extends Controller
                 'provider' => $provider
             ]);
 
+            Auth::login($user);
+
             return redirect()->route('home');
-            // return redirect('/users/' . $user->id);
         }
 
     }
