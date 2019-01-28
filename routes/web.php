@@ -30,6 +30,9 @@ Route::post('pets/searchResults', 'PetController@searchResults')->name('pets.sea
 Route::resource('pets', 'PetController');
 Route::resource('users', 'UserController');
 
+Route::get('pay', 'PaymentController@pay')->name('pay');
+Route::post('pay', 'PaymentController@processPay')->name('processPay');
+
 Route::get('/thanks', function() {
     return view('thanks');
 });
