@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Stripe\Stripe;
 use Stripe\Customer;
 use Stripe\Charge;
+use App\user;
 
 class PaymentController extends Controller
 {
@@ -26,34 +27,52 @@ class PaymentController extends Controller
      */
     public function processPay(Request $request)
     {
-        dd($request->all());
-
-        $request->validate([
-            'card_number' => 'required|integer|max:16',
-            'card_month' => 'required|integer|max:2',
-            'card_year' => 'required|integer|max:2',
-            'card_csv' => 'required|integer|max:3',
-            'zip_code' => 'required|integer|max:6'
-        ]);
 
         try {
             Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
 
+            $amount = 700;
+
+            // this customer record goes to Stripe
             $customer = Customer::create(array(
                 'email' => $request->stripeEmail,
-                'source' => $request->stripeToken
+                'source' => $request->stripeToken,
             ));
 
+            // this charge record goes to Stripe
             $charge = Charge::create(array(
                 'customer' => $customer->id,
-                'amount' => 1999,
-                'currency' => 'usd'
+                'amount' => $amount,
+                'currency' => 'usd',
+                'description' => 'Basic subscription charge'
             ));
 
-            return 'Charge successful, you get the course!';
+            // $stripeToken = $request->input('stripeToken');
 
-        } catch (\Exception $ex) {
-            return $ex->getMessage();
+            // add subscription record to our db
+            $user = User::find(1);
+            // $user = User::find(auth()->user()->id);
+
+            // $user->newSubscription('basic','monthly')->create($stripeToken);
+            $user->newSubscription('basic','monthly');
+
+
+            // return 'Charge successful, you get the course!';
+            return view('paysuccess')->with('amount', $amount)->with('subscription', 'basic');
+
+        } catch (\Exception $e) {
+
+            return $e->getMessage();
         }
+    }
+
+    /**
+     * Display view/screen with payment form
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function paySuccess()
+    {
+        return view('paySuccess');
     }
 }
