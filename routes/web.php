@@ -32,6 +32,7 @@ Route::resource('users', 'UserController');
 
 Route::get('pay', 'PaymentController@pay')->name('pay');
 Route::post('pay', 'PaymentController@processPay')->name('processPay');
+Route::get('paysuccess', 'PaymentController@paySuccess')->name('paySuccess');
 
 Route::get('/thanks', function() {
     return view('thanks');
