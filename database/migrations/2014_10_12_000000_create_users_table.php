@@ -29,9 +29,9 @@ class CreateUsersTable extends Migration
             $table->decimal('longitude', 20, 15)->nullable();
             $table->string('email')->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('image');
-            $table->string('provider');  // socialite - Facebook, GitHub - login
-            $table->string('provider_id');
+            $table->string('image')->nullable();
+            $table->string('provider')->nullable(); // socialite - Facebook, GitHub - login
+            $table->string('provider_id')->nullable();
             $table->string('password')->nullable();
             $table->string('stripe_id')->nullable()->collation('utf8mb4_bin');
             $table->string('card_brand')->nullable();
