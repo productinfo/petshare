@@ -166,6 +166,7 @@ return [
          * Package Service Providers...
          */
         Laravel\Socialite\SocialiteServiceProvider::class,
+        Laravel\Cashier\CashierServiceProvider::class,
 
         /*
          * Application Service Providers...
